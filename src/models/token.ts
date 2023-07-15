@@ -1,7 +1,8 @@
 import * as mongoose from "mongoose";
 import { tokenTypes } from "../config/tokens";
+import { IToken } from "../types/Models/IToken";
 
-const tokenSchema = new mongoose.Schema(
+const tokenSchema = new mongoose.Schema<IToken>(
   {
     token: {
       type: String,
@@ -35,3 +36,6 @@ const tokenSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+const Token = mongoose.model<IToken>("Token", tokenSchema);
+export default Token;

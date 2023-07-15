@@ -1,13 +1,14 @@
 import * as mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import { IUser } from "../types/Models/IUser";
 
-const userSchema = new mongoose.Schema({
-  password: { type: String, required: true }, //*
-  userName: { type: String, unique: true }, //*
+const userSchema = new mongoose.Schema<IUser>({
+  password: { type: String, required: true },
+  userName: { type: String, unique: true },
   sex: { type: Number, default: null },
   name: { type: String, default: "" },
   creationTime: { type: String, default: new Date() },
-  surname: { type: String, default: "" }, //*
+  surname: { type: String, default: "" },
   emailAddress: {
     type: String,
     unique: true,
@@ -38,5 +39,5 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 export default User;

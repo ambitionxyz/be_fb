@@ -22,7 +22,7 @@ export abstract class BaseRepository<T> implements IBaseRepository<T> {
     return result;
   }
 
-  async update(id: number, updateFeild: Object): Promise<T> {
+  async update(id: string, updateFeild: Object): Promise<T> {
     return await this._db.findOneAndUpdate({ id }, updateFeild);
   }
 
@@ -30,7 +30,7 @@ export abstract class BaseRepository<T> implements IBaseRepository<T> {
     return await this._db.create(model);
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this._db.deleteOne({ id });
   }
 }
