@@ -6,12 +6,13 @@ enum TokenTypes {
   // VERIFY_EMAIL = 'verify_email',
 }
 
-export interface IToken extends Document {
+export interface IToken {
+  id?: string;
   token: string;
   user: Types.ObjectId;
   type: TokenTypes;
   expires: Date;
   blacklisted: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

@@ -1,4 +1,4 @@
-import { JwtStrategy, ExtractJwt } from "passport-jwt";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import config from "./config";
 import User from "../models/user";
 import { tokenTypes } from "./tokens";

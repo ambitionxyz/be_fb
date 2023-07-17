@@ -30,6 +30,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   console.log("ERROR HANDLER");
+  console.log(err);
   let { statusCode, message } = err;
   if (config.env === "production" && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;

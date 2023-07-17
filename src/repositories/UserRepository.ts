@@ -10,12 +10,12 @@ class UserRepository extends BaseRepository<IUser> {
   }
 
   async isEmailTaken(
-    emailInput: string,
-    excludeUserId: string
+    emailInput: string
+    // excludeUserId: string
   ): Promise<boolean> {
     const user = await this._db.findOne({
       emailAddress: emailInput,
-      _id: { $ne: excludeUserId },
+      // _id: { $ne: excludeUserId },
     });
     return !!user;
   }
@@ -25,7 +25,7 @@ class UserRepository extends BaseRepository<IUser> {
   }
 
   async getUserById(id: string): Promise<IUser> {
-    return this.findOne({ id: id });
+    return this.findOne({ _id: id });
   }
 
   async updateUserById(userId: string, updateBody): Promise<IUser> {
@@ -33,12 +33,12 @@ class UserRepository extends BaseRepository<IUser> {
     if (!user) {
       throw new ApiError(httpStatus.NOT_FOUND, "User not found");
     }
-    if (
-      updateBody.email &&
-      (await this.isEmailTaken(updateBody.email, userId))
-    ) {
-      throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
-    }
+    // if (
+    //   updateBody.email &&
+    //   (await this.isEmailTaken(updateBody.email, userId))
+    // ) {
+    //   throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
+    // }
     const userUpdated = await this.update(userId, updateBody);
     return userUpdated;
   }

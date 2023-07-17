@@ -4,13 +4,17 @@ import { IToken } from "../types/Models/IToken";
 
 const tokenSchema = new mongoose.Schema<IToken>(
   {
+    id: {
+      type: String,
+      unique: true,
+    },
     token: {
       type: String,
       required: true,
       index: true,
     },
     user: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -36,6 +40,13 @@ const tokenSchema = new mongoose.Schema<IToken>(
     timestamps: true,
   }
 );
+
+tokenSchema.pre("save", async function (next: () => void) {
+  if (!this.id) {
+    this.id = this._id.toString();
+  }
+  next();
+});
 
 const Token = mongoose.model<IToken>("Token", tokenSchema);
 export default Token;

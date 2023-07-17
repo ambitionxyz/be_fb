@@ -8,7 +8,7 @@ import helmet from "helmet";
 import passport = require("passport");
 import { jwtStrategy } from "../config/passport";
 
-import AuthLoginRouter = require("./AuthLoginRouter");
+import AuthLoginRouter = require("./auth.router");
 
 class MasterRouter extends BaseRouter {
   constructor() {

@@ -3,6 +3,10 @@ import bcrypt from "bcrypt";
 import { IUser } from "../types/Models/IUser";
 
 const userSchema = new mongoose.Schema<IUser>({
+  id: {
+    type: String,
+    unique: true,
+  },
   password: { type: String, required: true },
   userName: { type: String, unique: true },
   sex: { type: Number, default: null },
@@ -27,6 +31,9 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
 };
 
 userSchema.methods.isPasswordMatch = async function (password) {
+  if (!this.id) {
+    this.id = this._id.toString();
+  }
   const user = this;
   return bcrypt.compare(password, user.password);
 };

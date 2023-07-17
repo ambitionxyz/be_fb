@@ -33,4 +33,8 @@ export abstract class BaseRepository<T> implements IBaseRepository<T> {
   async delete(id: string): Promise<void> {
     await this._db.deleteOne({ id });
   }
+
+  async deleteMany(options: Object): Promise<void> {
+    await this._db.deleteMany(options);
+  }
 }

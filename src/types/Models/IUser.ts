@@ -2,7 +2,8 @@ import { Moment } from "moment";
 import * as mongoose from "mongoose";
 
 export interface IUser extends Document {
-  id(id: any, expires: Moment, RESET_PASSWORD: string): unknown;
+  id?: string;
+  // id(id: any, expires: Moment, RESET_PASSWORD: string): unknown;
   password: string;
   userName: string;
   sex: number | null;
@@ -15,6 +16,7 @@ export interface IUser extends Document {
   isActive: boolean | null;
   roleNames: string[];
   avatarPath: string;
+  isPasswordMatch(password: string): Promise<boolean>;
 }
 
 // export interface IUser extends IUserDocument {
